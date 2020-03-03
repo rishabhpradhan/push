@@ -1,0 +1,31 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <a class="navbar-brand" href="#">Wave</a>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" [(ngModel)]="subscriber" (keyup.enter) = subscribe()
+        name="subscriber" type="text" [disabled]="submitted" placeholder="Subscriber">
+    <button class="btn btn-success" type="button"   (click)="subscribe()" [hidden]="submitted">Subscribe</button>
+    <button class="btn btn-default" type="button" (click)="unsubscribe()" [hidden]="!submitted">Unsubscribe</button>
+  </form>
+</nav>
+<br>
+<div *ngIf ="submitted" class="container">
+  <h2>Messages</h2>
+  <p>Incoming messages for <kbd>{{subscriber}}</kbd> </p>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th class="w-75">Message</th>
+        <th class="w-25">Timestamp</th>
+      </tr>
+    </thead>
+    <tbody>
+       <tr *ngFor="let message of messages">
+         <td>{{message.message}}</td>
+         <td>{{message.date | date: 'medium'}}</td>
+       </tr>
+    </tbody>
+  </table>
+</div>
+
+<router-outlet></router-outlet>
